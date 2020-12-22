@@ -1,0 +1,6 @@
+.terraform
+*lock.hcl
+terraform.tfvars
+venv
+.idea
+.DS_Store
