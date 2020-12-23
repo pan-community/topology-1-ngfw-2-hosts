@@ -37,8 +37,8 @@ resource "azurerm_virtual_machine" "firewall" {
 
   os_profile {
     computer_name = "pa-vm"
-    admin_username = var.Admin_Username
-    admin_password = var.Admin_Password
+    admin_username = var.admin_username
+    admin_password = var.admin_password
   }
 
   os_profile_linux_config {
@@ -54,7 +54,7 @@ resource "azurerm_network_interface" "fwmanagement" {
     name = "fweth0"
     subnet_id = azurerm_subnet.management.id
     private_ip_address_allocation = "Static"
-    private_ip_address = var.FW_Mgmt_IP
+    private_ip_address = var.fw_mgmt_ip
     public_ip_address_id = azurerm_public_ip.fwmanagement.id
   }
   depends_on = [azurerm_public_ip.fwmanagement]
@@ -69,7 +69,7 @@ resource "azurerm_network_interface" "fwuntrust" {
     name = "fweth1"
     subnet_id = azurerm_subnet.untrust.id
     private_ip_address_allocation = "Static"
-    private_ip_address = var.FW_Untrust_IP
+    private_ip_address = var.fw_untrust_ip
   }
 }
 
@@ -82,6 +82,6 @@ resource "azurerm_network_interface" "fwtrust" {
     name = "fweth2"
     subnet_id = azurerm_subnet.trust.id
     private_ip_address_allocation = "Static"
-    private_ip_address = var.FW_Trust_IP
+    private_ip_address = var.fw_trust_ip
   }
 }

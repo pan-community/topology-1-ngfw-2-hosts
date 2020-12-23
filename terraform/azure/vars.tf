@@ -1,26 +1,88 @@
-variable "Azure_Region" {}
-variable "Admin_Username" {}
-variable "Admin_Password" {}
-variable "resource_group_name" {}
-variable "Bootstrap_Storage_Account" {}
-variable "Storage_Account_Access_Key" {}
-variable "Storage_Account_Fileshare" {}
-variable "Storage_Account_Fileshare_Directory" {}
-variable "Web_Initscript_Path" {}
-variable "Attack_Initscript_Path" {}
-variable "Victim_CIDR" {}
-variable "Attack_CIDR" {}
-variable "Mgmt_Subnet_CIDR" {}
-variable "Untrust_Subnet_CIDR" {}
-variable "Trust_Subnet_CIDR" {}
-variable "AppGW_Subnet_CIDR" {}
-variable "Web_Subnet_CIDR" {}
-variable "Attack_Subnet_CIDR" {}
-variable "FW_Mgmt_IP" {}
-variable "FW_Untrust_IP" {}
-variable "FW_Trust_IP" {}
-variable "WebLB_IP" {}
-variable "client_01_mgmt_ip" {}
-variable "client_01_trust_ip" {}
-variable "client_02_mgmt_ip" {}
-variable "client_02_trust_ip" {}
+variable "azure_region" {
+  type = string
+  default = "centralus"
+}
+
+variable "admin_username" {
+  type = string
+  default = "paloalto"
+}
+
+variable "admin_password" {
+  type = string
+  default = "Super Secret 1!"
+}
+
+variable "resource_group_name" {
+  type = string
+  default = "topology_1_ngfw_2_hosts"
+}
+#### Inside vnet ####
+
+variable "inside_cidr" {
+  type = string
+  default = "192.168.0.0/16"
+}
+
+#### Outside vnet ####
+
+variable "outside_cidr" {
+  type = string
+  default = "10.254.0.0/16"
+}
+
+#### Management Subnet ####$
+
+variable "mgmt_subnet_cidr" {
+  type = string
+  default = "192.168.128.0/24"
+}
+
+variable "fw_mgmt_ip" {
+  type = string
+  default = "192.168.128.65"
+}
+
+variable "client_01_mgmt_ip" {
+  type = string
+  default = "192.168.128.66"
+}
+
+variable "client_02_mgmt_ip" {
+  type = string
+  default = "192.168.128.67"
+}
+
+#### Trust Subnet ####
+
+variable "trust_subnet_cidr" {
+  type = string
+  default = "192.168.254.0/24"
+}
+
+variable "fw_trust_ip" {
+  type = string
+  default = "192.168.254.65"
+}
+
+variable "client_01_trust_ip" {
+  type = string
+  default = "192.168.254.66"
+}
+
+variable "client_02_trust_ip" {
+  type = string
+  default = "192.168.254.67"
+}
+
+#### Untrust Subnet ####
+
+variable "untrust_subnet_cidr" {
+  type = string
+  default = "10.254.254.0/24"
+}
+
+variable "fw_untrust_ip" {
+  type = string
+  default = "10.254.254.65"
+}

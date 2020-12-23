@@ -20,8 +20,8 @@ resource "azurerm_virtual_machine" "client-02" {
 
   os_profile {
     computer_name = "client-1"
-    admin_username = var.Admin_Username
-    admin_password = var.Admin_Password
+    admin_username = var.admin_username
+    admin_password = var.admin_password
   }
 
   network_interface_ids = [

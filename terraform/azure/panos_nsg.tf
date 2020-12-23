@@ -12,7 +12,7 @@ resource "azurerm_network_security_group" "PAN_FW_NSG" {
     source_port_range = "*"
     destination_port_range = "22"
     source_address_prefix = "*"
-    destination_address_prefix = var.FW_Mgmt_IP
+    destination_address_prefix = var.fw_mgmt_ip
   }
 
   security_rule {
@@ -24,7 +24,7 @@ resource "azurerm_network_security_group" "PAN_FW_NSG" {
     source_port_range = "*"
     destination_port_range = "443"
     source_address_prefix = "*"
-    destination_address_prefix = var.FW_Mgmt_IP
+    destination_address_prefix = var.fw_mgmt_ip
   }
 }
 
