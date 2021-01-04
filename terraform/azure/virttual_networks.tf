@@ -1,17 +1,9 @@
 ### Virtual Network ####
 
-resource "azurerm_virtual_network" "inside" {
-  name = "virtual_network"
+resource "azurerm_virtual_network" "topology" {
+  name = "topology_virtual_network"
   address_space = [
-    var.inside_cidr]
-  location = azurerm_resource_group.resourcegroup.location
-  resource_group_name = azurerm_resource_group.resourcegroup.name
-}
-
-resource "azurerm_virtual_network" "outside" {
-  name = "virtual_network"
-  address_space = [
-    var.outside_cidr]
+    var.topology_cidr]
   location = azurerm_resource_group.resourcegroup.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
 }
@@ -21,22 +13,29 @@ resource "azurerm_virtual_network" "outside" {
 resource "azurerm_subnet" "management" {
   name = "management"
   resource_group_name = azurerm_resource_group.resourcegroup.name
-  virtual_network_name = azurerm_virtual_network.inside.name
+  virtual_network_name = azurerm_virtual_network.topology.name
   address_prefixes = [var.mgmt_subnet_cidr]
 }
 
 resource "azurerm_subnet" "untrust" {
   name = "untrust"
   resource_group_name = azurerm_resource_group.resourcegroup.name
-  virtual_network_name = azurerm_virtual_network.inside.name
+  virtual_network_name = azurerm_virtual_network.topology.name
   address_prefixes = [var.untrust_subnet_cidr]
 }
 
 resource "azurerm_subnet" "trust" {
   name = "trust"
   resource_group_name = azurerm_resource_group.resourcegroup.name
-  virtual_network_name = azurerm_virtual_network.inside.name
+  virtual_network_name = azurerm_virtual_network.topology.name
   address_prefixes = [var.trust_subnet_cidr]
+}
+
+resource "azurerm_subnet" "dmz" {
+  name = "dmz"
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  virtual_network_name = azurerm_virtual_network.topology.name
+  address_prefixes = [var.dmz_subnet_cidr]
 }
 
 #### Route tables ####
@@ -77,8 +76,8 @@ resource "azurerm_subnet_route_table_association" "untrust" {
 
 ### Public IPs ####
 
-resource "azurerm_public_ip" fwmanagement {
-  name = "fwmanagement"
+resource "azurerm_public_ip" fw_mgmt_ip {
+  name = "fw_mgmt_ip"
   location = azurerm_resource_group.resourcegroup.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
   allocation_method = "Static"

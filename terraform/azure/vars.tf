@@ -17,21 +17,15 @@ variable "resource_group_name" {
   type = string
   default = "topology_1_ngfw_2_hosts"
 }
-#### Inside vnet ####
 
-variable "inside_cidr" {
+#### Topology vnet ####
+
+variable "topology_cidr" {
   type = string
   default = "192.168.0.0/16"
 }
 
-#### Outside vnet ####
-
-variable "outside_cidr" {
-  type = string
-  default = "10.254.0.0/16"
-}
-
-#### Management Subnet ####$
+#### Management Subnet ####
 
 variable "mgmt_subnet_cidr" {
   type = string
@@ -57,32 +51,45 @@ variable "client_02_mgmt_ip" {
 
 variable "trust_subnet_cidr" {
   type = string
-  default = "192.168.254.0/24"
+  default = "192.168.0.0/24"
 }
 
 variable "fw_trust_ip" {
   type = string
-  default = "192.168.254.65"
+  default = "192.168.0.65"
 }
 
 variable "client_01_trust_ip" {
   type = string
-  default = "192.168.254.66"
-}
-
-variable "client_02_trust_ip" {
-  type = string
-  default = "192.168.254.67"
+  default = "192.168.0.66"
 }
 
 #### Untrust Subnet ####
 
 variable "untrust_subnet_cidr" {
   type = string
-  default = "10.254.254.0/24"
+  default = "192.168.254.0/24"
 }
 
 variable "fw_untrust_ip" {
   type = string
-  default = "10.254.254.65"
+  default = "192.168.254.65"
 }
+
+#### DMZ Subnet ####
+
+variable "dmz_subnet_cidr" {
+  type = string
+  default = "192.168.253.0/24"
+}
+
+variable "fw_dmz_ip" {
+  type = string
+  default = "192.168.253.65"
+}
+
+variable "client_02_dmz_ip" {
+  type = string
+  default = "192.168.253.67"
+}
+

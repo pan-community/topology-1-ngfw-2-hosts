@@ -1,10 +1,10 @@
-resource "azurerm_network_security_group" "PAN_FW_NSG" {
-  name = "DefaultNSG"
+resource "azurerm_network_security_group" "nsg" {
+  name = "default_nsg"
   resource_group_name = azurerm_resource_group.resourcegroup.name
   location = azurerm_resource_group.resourcegroup.location
 
   security_rule {
-    name = "Allow-22"
+    name = "Allow-all-22"
     priority = 100
     direction = "Inbound"
     access = "Allow"
@@ -12,7 +12,7 @@ resource "azurerm_network_security_group" "PAN_FW_NSG" {
     source_port_range = "*"
     destination_port_range = "22"
     source_address_prefix = "*"
-    destination_address_prefix = var.fw_mgmt_ip
+    destination_address_prefixes = [var.client_01_mgmt_ip, var.client_02_mgmt_ip, var.fw_mgmt_ip]
   }
 
   security_rule {
@@ -30,15 +30,6 @@ resource "azurerm_network_security_group" "PAN_FW_NSG" {
 
 resource "azurerm_subnet_network_security_group_association" "management" {
   subnet_id = azurerm_subnet.management.id
-  network_security_group_id = azurerm_network_security_group.PAN_FW_NSG.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
-resource "azurerm_subnet_network_security_group_association" "untrust" {
-  subnet_id = azurerm_subnet.untrust.id
-  network_security_group_id = azurerm_network_security_group.PAN_FW_NSG.id
-}
-
-resource "azurerm_subnet_network_security_group_association" "trust" {
-  subnet_id = azurerm_subnet.trust.id
-  network_security_group_id = azurerm_network_security_group.PAN_FW_NSG.id
-}

@@ -50,8 +50,8 @@ resource "azurerm_network_interface" "client-02-data" {
   resource_group_name = azurerm_resource_group.resourcegroup.name
   ip_configuration {
     name = "client-02-eth1"
-    subnet_id = azurerm_subnet.trust.id
+    subnet_id = azurerm_subnet.dmz.id
     private_ip_address_allocation = "Static"
-    private_ip_address = var.client_02_trust_ip
+    private_ip_address = var.client_02_dmz_ip
   }
 }
