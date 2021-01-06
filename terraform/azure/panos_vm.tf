@@ -22,7 +22,7 @@ resource "azurerm_virtual_machine" "firewall" {
     publisher = "paloaltonetworks"
     offer = "vmseries-flex"
     sku = "byol"
-    version = "9.1.6"
+    version = var.ngfw_version
     # can also use 'latest' here as well
   }
 

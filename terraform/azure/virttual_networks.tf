@@ -83,3 +83,16 @@ resource "azurerm_public_ip" fw_mgmt_ip {
   allocation_method = "Static"
 }
 
+resource "azurerm_public_ip" client_01_mgmt_ip {
+  name = "client_01_mgmt_ip"
+  location = azurerm_resource_group.resourcegroup.location
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  allocation_method = "Static"
+}
+
+resource "azurerm_public_ip" client_02_mgmt_ip {
+  name = "client_02_mgmt_ip"
+  location = azurerm_resource_group.resourcegroup.location
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  allocation_method = "Static"
+}

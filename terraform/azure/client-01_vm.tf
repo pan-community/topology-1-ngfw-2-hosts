@@ -46,6 +46,7 @@ resource "azurerm_network_interface" "client-01-mgmt" {
     subnet_id = azurerm_subnet.management.id
     private_ip_address_allocation = "Static"
     private_ip_address = var.client_01_mgmt_ip
+    public_ip_address_id = azurerm_public_ip.client_01_mgmt_ip.id
   }
 }
 

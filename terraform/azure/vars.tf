@@ -18,6 +18,11 @@ variable "resource_group_name" {
   default = "topology_1_ngfw_2_hosts"
 }
 
+variable "ngfw_version" {
+  type = string
+  default = "10.0.3"
+}
+
 #### Topology vnet ####
 
 variable "topology_cidr" {
