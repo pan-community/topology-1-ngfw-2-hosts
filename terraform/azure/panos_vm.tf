@@ -1,4 +1,3 @@
-
 resource "azurerm_virtual_machine" "firewall" {
   name = "firewall"
   location = azurerm_resource_group.resourcegroup.location
@@ -6,7 +5,8 @@ resource "azurerm_virtual_machine" "firewall" {
   network_interface_ids = [
     azurerm_network_interface.fw_mgmt_ip.id,
     azurerm_network_interface.fwuntrust.id,
-    azurerm_network_interface.fwtrust.id
+    azurerm_network_interface.fwtrust.id,
+    azurerm_network_interface.fw_dmz.id
   ]
 
   primary_network_interface_id = azurerm_network_interface.fw_mgmt_ip.id
@@ -22,7 +22,8 @@ resource "azurerm_virtual_machine" "firewall" {
     publisher = "paloaltonetworks"
     offer = "vmseries-flex"
     sku = "byol"
-    version = "9.1.6" # can also use 'latest' here as well
+    version = "9.1.6"
+    # can also use 'latest' here as well
   }
 
   storage_os_disk {
@@ -57,7 +58,8 @@ resource "azurerm_network_interface" "fw_mgmt_ip" {
     private_ip_address = var.fw_mgmt_ip
     public_ip_address_id = azurerm_public_ip.fw_mgmt_ip.id
   }
-  depends_on = [azurerm_public_ip.fw_mgmt_ip]
+  depends_on = [
+    azurerm_public_ip.fw_mgmt_ip]
 }
 
 resource "azurerm_network_interface" "fwuntrust" {

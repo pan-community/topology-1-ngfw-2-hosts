@@ -25,7 +25,11 @@ resource "azurerm_virtual_machine" "client-02" {
   }
 
   network_interface_ids = [
-    azurerm_network_interface.client-02-mgmt.id]
+    azurerm_network_interface.client-02-mgmt.id,
+    azurerm_network_interface.client-02-data.id
+  ]
+
+  primary_network_interface_id = azurerm_network_interface.client-02-mgmt.id
 
   os_profile_linux_config {
     disable_password_authentication = false
