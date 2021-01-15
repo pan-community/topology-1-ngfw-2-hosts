@@ -1,9 +1,9 @@
 ### Virtual Network ####
 
-resource "azurerm_virtual_network" "vnet" {
-  name = "virtual_network"
+resource "azurerm_virtual_network" "topology" {
+  name = "topology_virtual_network"
   address_space = [
-    var.Victim_CIDR]
+    var.topology_cidr]
   location = azurerm_resource_group.resourcegroup.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
 }
@@ -13,22 +13,29 @@ resource "azurerm_virtual_network" "vnet" {
 resource "azurerm_subnet" "management" {
   name = "management"
   resource_group_name = azurerm_resource_group.resourcegroup.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes = var.Mgmt_Subnet_CIDR
+  virtual_network_name = azurerm_virtual_network.topology.name
+  address_prefixes = [var.mgmt_subnet_cidr]
 }
 
 resource "azurerm_subnet" "untrust" {
   name = "untrust"
   resource_group_name = azurerm_resource_group.resourcegroup.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes = var.Untrust_Subnet_CIDR
+  virtual_network_name = azurerm_virtual_network.topology.name
+  address_prefixes = [var.untrust_subnet_cidr]
 }
 
 resource "azurerm_subnet" "trust" {
   name = "trust"
   resource_group_name = azurerm_resource_group.resourcegroup.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes = var.Trust_Subnet_CIDR
+  virtual_network_name = azurerm_virtual_network.topology.name
+  address_prefixes = [var.trust_subnet_cidr]
+}
+
+resource "azurerm_subnet" "dmz" {
+  name = "dmz"
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  virtual_network_name = azurerm_virtual_network.topology.name
+  address_prefixes = [var.dmz_subnet_cidr]
 }
 
 #### Route tables ####
@@ -69,10 +76,23 @@ resource "azurerm_subnet_route_table_association" "untrust" {
 
 ### Public IPs ####
 
-resource "azurerm_public_ip" fwmanagement {
-  name = "fwmanagement"
+resource "azurerm_public_ip" fw_mgmt_ip {
+  name = "fw_mgmt_ip"
   location = azurerm_resource_group.resourcegroup.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
   allocation_method = "Static"
 }
 
+resource "azurerm_public_ip" client_01_mgmt_ip {
+  name = "client_01_mgmt_ip"
+  location = azurerm_resource_group.resourcegroup.location
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  allocation_method = "Static"
+}
+
+resource "azurerm_public_ip" client_02_mgmt_ip {
+  name = "client_02_mgmt_ip"
+  location = azurerm_resource_group.resourcegroup.location
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  allocation_method = "Static"
+}

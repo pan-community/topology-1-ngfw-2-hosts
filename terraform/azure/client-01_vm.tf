@@ -20,12 +20,17 @@ resource "azurerm_virtual_machine" "client-01" {
 
   os_profile {
     computer_name = "client-1"
-    admin_username = var.Admin_Username
-    admin_password = var.Admin_Password
+    admin_username = var.admin_username
+    admin_password = var.admin_password
   }
 
   network_interface_ids = [
-    azurerm_network_interface.client-01-mgmt.id]
+    azurerm_network_interface.client-01-mgmt.id,
+    azurerm_network_interface.client-01-data.id
+  ]
+
+
+  primary_network_interface_id = azurerm_network_interface.client-01-mgmt.id
 
   os_profile_linux_config {
     disable_password_authentication = false
@@ -41,6 +46,7 @@ resource "azurerm_network_interface" "client-01-mgmt" {
     subnet_id = azurerm_subnet.management.id
     private_ip_address_allocation = "Static"
     private_ip_address = var.client_01_mgmt_ip
+    public_ip_address_id = azurerm_public_ip.client_01_mgmt_ip.id
   }
 }
 
