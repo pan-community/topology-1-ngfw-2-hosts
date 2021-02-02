@@ -1,0 +1,6 @@
+# IDE dir
+.idea/
+.vscode/
+
+.DS_Store
+
