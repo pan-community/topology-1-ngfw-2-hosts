@@ -12,6 +12,14 @@ labels:
   terraform_image: registry.gitlab.com/panw-gse/as/terraform_tools:0.14
 
 variables:
+
+  - name: resource_group_name
+    description: Resource Group Name
+    default: 1ngfw_2host_topology_0001
+    type_hint: text
+    help_text: |
+      This value must be unique across your Azure Subscription
+
   - name: azure_region
     description: Azure Region
     default: centralus
@@ -26,18 +34,12 @@ variables:
     description: Admin Username
     default: paloalto
     type_hint: text
+    help_text: input username and password will be applied to all topology devices
 
   - name: admin_password
     description: Admin Password
     default:
     type_hint: password
-
-  - name: resource_group_name
-    description: Resource Group Name
-    default: 1ngfw_2host_topology_0001
-    type_hint: text
-    help_text: |
-      This value must be unique across your Azure Subscription
 
   - name: ngfw_version
     description: PAN-OS NGFW Version
@@ -48,5 +50,46 @@ variables:
         value: 10.0.3
       - key: 9.1.6
         value: 9.1.6
+
+  # used to capture and add template variables values into the panhandler context
+  - name: untrust_subnet_cidr
+    description: internet subnet cidr
+    default: 192.168.254.0/24
+    type_hint: hidden
+
+  - name: fw_untrust_ip
+    description: internal ip address
+    default: 192.168.254.65
+    type_hint: hidden
+
+  - name: trust_subnet_cidr
+    description: trust subnet cider
+    default: 192.168.0.0/24
+    type_hint: hidden
+
+  - name: fw_trust_ip
+    description: internal ip address
+    default: 192.168.0.65
+    type_hint: hidden
+
+  - name: client_01_trust_ip
+    description: internal subnet cider
+    default: 192.168.0.66
+    type_hint: hidden
+
+  - name: dmz_subnet_cidr
+    description: dmz subnet cider
+    default: 192.168.253.0/24
+    type_hint: hidden
+
+  - name: fw_dmz_ip
+    description: dmz ip address
+    default: 192.168.253.65
+    type_hint: hidden
+
+  - name: client_02_dmz_ip
+    description: dmz subnet cider
+    default: 192.168.253.67
+    type_hint: hidden
 
 
