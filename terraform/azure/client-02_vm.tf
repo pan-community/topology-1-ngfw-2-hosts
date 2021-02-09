@@ -19,7 +19,7 @@ resource "azurerm_virtual_machine" "client-02" {
   }
 
   os_profile {
-    computer_name = "client-1"
+    computer_name = "client-02"
     admin_username = var.admin_username
     admin_password = var.admin_password
   }
