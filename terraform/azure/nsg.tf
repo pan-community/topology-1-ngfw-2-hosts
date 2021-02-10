@@ -33,3 +33,73 @@ resource "azurerm_subnet_network_security_group_association" "management" {
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
+resource "azurerm_network_security_group" "trust" {
+  name = "trust"
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  location = azurerm_resource_group.resourcegroup.location
+
+  security_rule {
+    name = "wide-open"
+    priority = 100
+    direction = "Inbound"
+    access = "Allow"
+    protocol = "Tcp"
+    source_port_range = "*"
+    destination_port_range = "*"
+    source_address_prefix = "*"
+    destination_address_prefix = "*"
+  }
+  security_rule {
+    name = "wide-open-outbound"
+    priority = 100
+    direction = "Outbound"
+    access = "Allow"
+    protocol = "Tcp"
+    source_port_range = "*"
+    destination_port_range = "*"
+    source_address_prefix = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "trust" {
+  subnet_id = azurerm_subnet.trust.id
+  network_security_group_id = azurerm_network_security_group.trust.id
+}
+
+resource "azurerm_network_security_group" "dmz" {
+  name = "dmz"
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  location = azurerm_resource_group.resourcegroup.location
+
+  security_rule {
+    name = "wide-open-inbound"
+    priority = 100
+    direction = "Inbound"
+    access = "Allow"
+    protocol = "Tcp"
+    source_port_range = "*"
+    destination_port_range = "*"
+    source_address_prefix = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name = "wide-open-outbound"
+    priority = 100
+    direction = "Outbound"
+    access = "Allow"
+    protocol = "Tcp"
+    source_port_range = "*"
+    destination_port_range = "*"
+    source_address_prefix = "*"
+    destination_address_prefix = "*"
+  }
+
+}
+
+resource "azurerm_subnet_network_security_group_association" "dmz" {
+  subnet_id = azurerm_subnet.dmz.id
+  network_security_group_id = azurerm_network_security_group.dmz.id
+}
+

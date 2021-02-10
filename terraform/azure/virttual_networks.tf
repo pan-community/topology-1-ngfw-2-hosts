@@ -62,6 +62,30 @@ resource "azurerm_route_table" "untrust" {
   }
 }
 
+resource "azurerm_route_table" "trust" {
+  name = "trust"
+  location = azurerm_resource_group.resourcegroup.location
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  route {
+    name = "default-ngfw"
+    address_prefix = "0.0.0.0/0"
+    next_hop_type = "VirtualAppliance"
+    next_hop_in_ip_address = var.fw_trust_ip
+  }
+}
+
+resource "azurerm_route_table" "dmz" {
+  name = "dmz"
+  location = azurerm_resource_group.resourcegroup.location
+  resource_group_name = azurerm_resource_group.resourcegroup.name
+  route {
+    name = "default-ngfw"
+    address_prefix = "0.0.0.0/0"
+    next_hop_type = "VirtualAppliance"
+    next_hop_in_ip_address = var.fw_dmz_ip
+  }
+}
+
 #### Route Table Associations ####
 
 resource "azurerm_subnet_route_table_association" "management" {
@@ -72,6 +96,16 @@ resource "azurerm_subnet_route_table_association" "management" {
 resource "azurerm_subnet_route_table_association" "untrust" {
   subnet_id = azurerm_subnet.untrust.id
   route_table_id = azurerm_route_table.untrust.id
+}
+
+resource "azurerm_subnet_route_table_association" "trust" {
+  subnet_id = azurerm_subnet.trust.id
+  route_table_id = azurerm_route_table.trust.id
+}
+
+resource "azurerm_subnet_route_table_association" "dmz" {
+  subnet_id = azurerm_subnet.dmz.id
+  route_table_id = azurerm_route_table.dmz.id
 }
 
 ### Public IPs ####
