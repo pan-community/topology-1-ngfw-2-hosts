@@ -15,7 +15,7 @@ variables:
 
   - name: resource_group_name
     description: Resource Group Name
-    default: 1ngfw_2host_topology_0001
+    default: cdp_1ngfw_2host_topology_0001
     type_hint: text
     help_text: |
       This value must be unique across your Azure Subscription

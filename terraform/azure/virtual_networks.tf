@@ -72,6 +72,12 @@ resource "azurerm_route_table" "trust" {
     next_hop_type = "VirtualAppliance"
     next_hop_in_ip_address = var.fw_trust_ip
   }
+  route {
+    name = "trust_to_dmz"
+    address_prefix = var.dmz_subnet_cidr
+    next_hop_type = "VirtualAppliance"
+    next_hop_in_ip_address = var.fw_trust_ip
+  }
 }
 
 resource "azurerm_route_table" "dmz" {
@@ -81,6 +87,12 @@ resource "azurerm_route_table" "dmz" {
   route {
     name = "default-ngfw"
     address_prefix = "0.0.0.0/0"
+    next_hop_type = "VirtualAppliance"
+    next_hop_in_ip_address = var.fw_dmz_ip
+  }
+  route {
+    name = "dmz_to_trust"
+    address_prefix = var.trust_subnet_cidr
     next_hop_type = "VirtualAppliance"
     next_hop_in_ip_address = var.fw_dmz_ip
   }
@@ -117,16 +129,10 @@ resource "azurerm_public_ip" fw_mgmt_ip {
   allocation_method = "Static"
 }
 
-resource "azurerm_public_ip" client_01_mgmt_ip {
-  name = "client_01_mgmt_ip"
+resource "azurerm_public_ip" jumphost_mgmt_ip {
+  name = "jumphost_mgmt_ip"
   location = azurerm_resource_group.resourcegroup.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
   allocation_method = "Static"
 }
 
-resource "azurerm_public_ip" client_02_mgmt_ip {
-  name = "client_02_mgmt_ip"
-  location = azurerm_resource_group.resourcegroup.location
-  resource_group_name = azurerm_resource_group.resourcegroup.name
-  allocation_method = "Static"
-}
