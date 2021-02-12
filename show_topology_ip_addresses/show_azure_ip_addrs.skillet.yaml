@@ -69,6 +69,21 @@ variables:
     type_hint: hidden
     default: ''
 
+  # private management ip addresses
+- name: fw_mgmt_ip
+  description: private fw mgmt ip address
+  default: ''
+  type_hint: hidden
+
+- name: client_01_mgmt_ip
+  description: private client 01 mgmt ip address
+  default: ''
+  type_hint: hidden
+
+- name: client_02_mgmt_ip
+  description: private client 02 mgmt ip address
+  default: ''
+  type_hint: hidden
 
 snippets:
 

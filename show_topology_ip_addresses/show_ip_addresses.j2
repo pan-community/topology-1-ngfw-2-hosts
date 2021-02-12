@@ -9,26 +9,30 @@
 <br/>
 <br/>
 
-<h5>Public IP Addresses</h5>
+<h5>Management IP Addresses</h5>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Device</th>
-            <th>IP Address</th>
+            <th>Public IP Address</th>
+            <th>Private IP Address</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>NGFW Management Interface</td>
             <td>{{ ngfw_ip_address }}</td>
+            <td>{{ fw_mgmt_ip }}</td>
         </tr>
         <tr>
             <td>Ubuntu Internal Host</td>
             <td> {{ client_01_ip_address }}</td>
+            <td>{{ client_01_mgmt_ip }}</td>
         </tr>
         <tr>
             <td>Ubuntu DMZ Host</td>
             <td> {{ client_02_ip_address }}</td>
+            <td>{{ client_02_mgmt_ip }}</td>
         </tr>
     </tbody>
 </table>
