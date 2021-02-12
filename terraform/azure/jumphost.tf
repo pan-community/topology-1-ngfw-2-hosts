@@ -41,7 +41,7 @@ resource "azurerm_network_interface" "jumphost-eth0" {
   resource_group_name = azurerm_resource_group.resourcegroup.name
   ip_configuration {
     name = "jumphost-eth0"
-    subnet_id = azurerm_subnet.trust.id
+    subnet_id = azurerm_subnet.management.id
     private_ip_address_allocation = "Static"
     private_ip_address = var.jumphost_mgmt_ip
     public_ip_address_id = azurerm_public_ip.jumphost_mgmt_ip.id
