@@ -12,7 +12,7 @@ resource "azurerm_network_security_group" "nsg" {
     source_port_range = "*"
     destination_port_range = "22"
     source_address_prefix = "*"
-    destination_address_prefixes = [var.client_01_mgmt_ip, var.client_02_mgmt_ip, var.fw_mgmt_ip]
+    destination_address_prefixes = [var.jumphost_mgmt_ip, var.fw_mgmt_ip]
   }
 
   security_rule {
@@ -39,11 +39,11 @@ resource "azurerm_network_security_group" "trust" {
   location = azurerm_resource_group.resourcegroup.location
 
   security_rule {
-    name = "wide-open"
+    name = "wide-open-inbound"
     priority = 100
     direction = "Inbound"
     access = "Allow"
-    protocol = "Tcp"
+    protocol = "*"
     source_port_range = "*"
     destination_port_range = "*"
     source_address_prefix = "*"
@@ -54,7 +54,7 @@ resource "azurerm_network_security_group" "trust" {
     priority = 100
     direction = "Outbound"
     access = "Allow"
-    protocol = "Tcp"
+    protocol = "*"
     source_port_range = "*"
     destination_port_range = "*"
     source_address_prefix = "*"
@@ -77,7 +77,7 @@ resource "azurerm_network_security_group" "dmz" {
     priority = 100
     direction = "Inbound"
     access = "Allow"
-    protocol = "Tcp"
+    protocol = "*"
     source_port_range = "*"
     destination_port_range = "*"
     source_address_prefix = "*"
@@ -89,13 +89,12 @@ resource "azurerm_network_security_group" "dmz" {
     priority = 100
     direction = "Outbound"
     access = "Allow"
-    protocol = "Tcp"
+    protocol = "*"
     source_port_range = "*"
     destination_port_range = "*"
     source_address_prefix = "*"
     destination_address_prefix = "*"
   }
-
 }
 
 resource "azurerm_subnet_network_security_group_association" "dmz" {

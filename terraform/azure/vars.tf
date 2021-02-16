@@ -15,7 +15,7 @@ variable "admin_password" {
 
 variable "resource_group_name" {
   type = string
-  default = "topology_1_ngfw_2_hosts"
+  default = "cdp_topology_1_ngfw_2_hosts"
 }
 
 variable "ngfw_version" {
@@ -42,14 +42,9 @@ variable "fw_mgmt_ip" {
   default = "192.168.128.65"
 }
 
-variable "client_01_mgmt_ip" {
+variable "jumphost_mgmt_ip" {
   type = string
-  default = "192.168.128.66"
-}
-
-variable "client_02_mgmt_ip" {
-  type = string
-  default = "192.168.128.67"
+  default = "192.168.128.68"
 }
 
 #### Trust Subnet ####

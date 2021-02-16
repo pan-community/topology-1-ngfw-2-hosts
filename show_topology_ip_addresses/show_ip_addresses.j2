@@ -7,6 +7,12 @@
 
 <br/>
 <br/>
+
+
+<img src="https://gitlab.com/panw-gse/tech-library/deploy/topology-1-ngfw-2-hosts/-/raw/images/hello-world-topology.png" width="800" alt="Hello World Topology">
+
+
+<br/>
 <br/>
 
 <h5>Management IP Addresses</h5>
@@ -25,14 +31,9 @@
             <td>{{ fw_mgmt_ip }}</td>
         </tr>
         <tr>
-            <td>Ubuntu Internal Host</td>
-            <td> {{ client_01_ip_address }}</td>
-            <td>{{ client_01_mgmt_ip }}</td>
-        </tr>
-        <tr>
-            <td>Ubuntu DMZ Host</td>
-            <td> {{ client_02_ip_address }}</td>
-            <td>{{ client_02_mgmt_ip }}</td>
+            <td>Jump Host</td>
+            <td> {{ jumphost_ip_address }}</td>
+            <td>{{ jumphost_mgmt_ip }}</td>
         </tr>
     </tbody>
 </table>
@@ -57,7 +58,7 @@
             <td>{{ fw_untrust_ip ~ "/" ~ untrust_subnet_cidr.split('/')[1] }}</td>
         </tr>
         <tr>
-            <td>NGFW Internet Interface</td>
+            <td>NGFW Internal Interface</td>
             <td>ethernet1/2</td>
             <td>{{ fw_trust_ip ~ "/" ~ trust_subnet_cidr.split('/')[1] }}</td>
         </tr>
@@ -67,13 +68,13 @@
             <td>{{ fw_dmz_ip ~ "/" ~ dmz_subnet_cidr.split('/')[1] }}</td>
         </tr>
         <tr>
-            <td>Ubuntu Internal Host</td>
-            <td>firewall facing interface</td>
+            <td>Ubuntu Internal Client-01</td>
+            <td>eth0</td>
             <td>{{ client_01_trust_ip ~ "/" ~ trust_subnet_cidr.split('/')[1] }}</td>
         </tr>
         <tr>
-            <td>Ubuntu DMZ Host</td>
-            <td>firewall facing interface</td>
+            <td>Ubuntu DMZ Client-02</td>
+            <td>eth0</td>
             <td>{{ client_02_dmz_ip ~ "/" ~ dmz_subnet_cidr.split('/')[1] }}</td>
         </tr>
     </tbody>

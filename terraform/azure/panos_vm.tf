@@ -3,13 +3,13 @@ resource "azurerm_virtual_machine" "firewall" {
   location = azurerm_resource_group.resourcegroup.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
   network_interface_ids = [
-    azurerm_network_interface.fw_mgmt_ip.id,
-    azurerm_network_interface.fwuntrust.id,
-    azurerm_network_interface.fwtrust.id,
+    azurerm_network_interface.fw_mgmt.id,
+    azurerm_network_interface.fw_untrust.id,
+    azurerm_network_interface.fw_trust.id,
     azurerm_network_interface.fw_dmz.id
   ]
 
-  primary_network_interface_id = azurerm_network_interface.fw_mgmt_ip.id
+  primary_network_interface_id = azurerm_network_interface.fw_mgmt.id
   vm_size = "Standard_D3_v2"
 
   plan {
@@ -47,12 +47,12 @@ resource "azurerm_virtual_machine" "firewall" {
   }
 }
 
-resource "azurerm_network_interface" "fw_mgmt_ip" {
-  name = "fw_mgmt_ip"
+resource "azurerm_network_interface" "fw_mgmt" {
+  name = "fw_mgmt"
   location = azurerm_resource_group.resourcegroup.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
   ip_configuration {
-    name = "fweth0"
+    name = "fw-mgmt_ip"
     subnet_id = azurerm_subnet.management.id
     private_ip_address_allocation = "Static"
     private_ip_address = var.fw_mgmt_ip
@@ -62,26 +62,26 @@ resource "azurerm_network_interface" "fw_mgmt_ip" {
     azurerm_public_ip.fw_mgmt_ip]
 }
 
-resource "azurerm_network_interface" "fwuntrust" {
-  name = "fwuntrust"
+resource "azurerm_network_interface" "fw_untrust" {
+  name = "fw_untrust"
   location = azurerm_resource_group.resourcegroup.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
   enable_ip_forwarding = "true"
   ip_configuration {
-    name = "fweth1"
+    name = "fw_untrust_ip"
     subnet_id = azurerm_subnet.untrust.id
     private_ip_address_allocation = "Static"
     private_ip_address = var.fw_untrust_ip
   }
 }
 
-resource "azurerm_network_interface" "fwtrust" {
-  name = "fwtrust"
+resource "azurerm_network_interface" "fw_trust" {
+  name = "fw_trust"
   location = azurerm_resource_group.resourcegroup.location
   resource_group_name = azurerm_resource_group.resourcegroup.name
   enable_ip_forwarding = "true"
   ip_configuration {
-    name = "fweth2"
+    name = "fw_trust_ip"
     subnet_id = azurerm_subnet.trust.id
     private_ip_address_allocation = "Static"
     private_ip_address = var.fw_trust_ip
@@ -94,7 +94,7 @@ resource "azurerm_network_interface" "fw_dmz" {
   resource_group_name = azurerm_resource_group.resourcegroup.name
   enable_ip_forwarding = "true"
   ip_configuration {
-    name = "fweth3"
+    name = "fw_dmz_ip"
     subnet_id = azurerm_subnet.dmz.id
     private_ip_address_allocation = "Static"
     private_ip_address = var.fw_dmz_ip
