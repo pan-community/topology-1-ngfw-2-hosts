@@ -1,0 +1,18 @@
+name: terraform_output
+label: Display Deploy Outputs
+description: Displays Deploy outputs
+type: docker
+labels:
+    collection: Example Skillets
+variables: []
+snippets:
+-   name: terraform_test
+    image: registry.gitlab.com/panw-gse/as/terraform_tools:0.14
+    tag: '0.14'
+    cmd: output -no-color -json
+    output_type: json
+    outputs:
+        - name: jumphost_ip_address
+          capture_pattern: jumphost_ip_address.value
+        - name: ngfw_ip_address
+          capture_pattern: ngfw_ip_address.value
