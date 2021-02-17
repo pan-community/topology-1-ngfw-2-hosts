@@ -7,31 +7,31 @@ output "jumphost_ip_address" {
 }
 
 output "client_01_trust_ip" {
-  value = azurerm_network_interface.client-01-eth0.ip_configuration.private_ip_address
+  value = azurerm_network_interface.client-01-eth0.private_ip_address
 }
 
 output "client_02_dmz_ip" {
-  value = azurerm_network_interface.client-02-eth0.ip_configuration.private_ip_address
+  value = azurerm_network_interface.client-02-eth0.private_ip_address
 }
 
 output "fw_mgmt_ip" {
-  value = azurerm_network_interface.fw_mgmt.ip_configuration.private_ip_address
+  value = azurerm_network_interface.fw_mgmt.private_ip_address
 }
 
 output "fw_dmz_ip" {
-  value = azurerm_network_interface.fw_dmz.ip_configuration.private_ip_address
+  value = azurerm_network_interface.fw_dmz.private_ip_address
 }
 
 output "fw_trust_ip" {
-  value = azurerm_network_interface.fw_trust.ip_configuration.private_ip_address
+  value = azurerm_network_interface.fw_trust.private_ip_address
 }
 
 output "fw_untrust_ip" {
-  value = azurerm_network_interface.fw_untrust.ip_configuration.private_ip_address
+  value = azurerm_network_interface.fw_untrust.private_ip_address
 }
 
 output "jumphost_mgmt_ip" {
-  value = azurerm_network_interface.jumphost-eth0.ip_configuration.private_ip_address
+  value = azurerm_network_interface.jumphost-eth0.private_ip_address
 }
 
 output "untrust_subnet_cidr" {
