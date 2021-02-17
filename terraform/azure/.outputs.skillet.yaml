@@ -1,0 +1,12 @@
+name: terraform_output
+label: Display Deploy Outputs
+description: Displays Deploy outputs
+type: docker
+labels:
+    collection: Example Skillets
+variables: []
+snippets:
+-   name: terraform_test
+    image: registry.gitlab.com/panw-gse/as/terraform_tools:0.14
+    tag: '0.14'
+    cmd: output -no-color
