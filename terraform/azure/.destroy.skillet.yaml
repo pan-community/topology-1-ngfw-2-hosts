@@ -9,4 +9,4 @@ snippets:
 -   name: terraform_destroy
     image: registry.gitlab.com/panw-gse/as/terraform_tools:0.14
     tag: '0.14'
-    cmd: destroy --auto-approve
+    cmd: destroy --auto-approve -no-color
