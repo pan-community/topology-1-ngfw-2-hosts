@@ -98,13 +98,8 @@ variables:
     default: 192.168.128.65
     type_hint: hidden
 
-  - name: client_01_mgmt_ip
-    description: private client 01 mgmt ip address
-    default: 192.168.128.66
-    type_hint: hidden
-
-  - name: client_02_mgmt_ip
-    description: private client 02 mgmt ip address
-    default: 192.168.128.67
+  - name: jumphost_mgmt_ip
+    description: private jumphost mgmt ip address
+    default: 192.168.128.68
     type_hint: hidden
 
