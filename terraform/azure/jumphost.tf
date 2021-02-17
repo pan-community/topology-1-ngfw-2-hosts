@@ -1,3 +1,16 @@
+data "template_file" "cloud-init" {
+  template = file("${path.root}/scripts/client-cloud-init.sh")
+}
+
+data "template_cloudinit_config" "cloud-init-data" {
+  gzip          = true
+  base64_encode = true
+
+  part {
+    content = data.template_file.cloud-init.rendered
+  }
+}
+
 resource "azurerm_virtual_machine" "jumphost" {
   name = "jumphost"
   location = azurerm_resource_group.resourcegroup.location
@@ -22,6 +35,8 @@ resource "azurerm_virtual_machine" "jumphost" {
     computer_name = "jumphost"
     admin_username = var.admin_username
     admin_password = var.admin_password
+    custom_data = data.template_cloudinit_config.cloud-init-data.rendered
+
   }
 
   network_interface_ids = [
