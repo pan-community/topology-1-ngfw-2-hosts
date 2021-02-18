@@ -14,5 +14,27 @@ snippets:
     outputs:
         - name: jumphost_ip_address
           capture_pattern: jumphost_ip_address.value
+        - name: jumphost_mgmt_ip
+          capture_pattern: jumphost_mgmt_ip.value
         - name: ngfw_ip_address
           capture_pattern: ngfw_ip_address.value
+        - name: fw_mgmt_ip
+          capture_pattern: jumphost_mgmt_ip.value
+        - name: untrust_subnet_cidr
+          capture_pattern: untrust_subnet_cidr.value
+        - name: fw_untrust_ip
+          capture_pattern: fw_untrust_ip.value
+        - name: trust_subnet_cidr
+          capture_pattern: trust_subnet_cidr.value
+        - name: fw_trust_ip
+          capture_pattern: fw_trust_ip.value
+        - name: client_01_trust_ip
+          capture_pattern: client_01_trust_ip.value
+        - name: dmz_subnet_cidr
+          capture_pattern: dmz_subnet_cidr.value
+        - name: fw_dmz_ip
+          capture_pattern: fw_dmz_ip.value
+        - name: client_02_dmz_ip
+          capture_pattern: client_02_dmz_ip.value
+
+

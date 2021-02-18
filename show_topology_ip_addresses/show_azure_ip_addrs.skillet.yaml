@@ -12,67 +12,54 @@ variables:
 -   name: resource_group_name
     description: Azure resource group name
     type_hint: hidden
-    default: ''
 
 -   name: ngfw_ip_address
     description: ngfw public mgmt interface address
     type_hint: hidden
-    default: ''
 
 -   name: jumphost_ip_address
     description: Jumphost public access interface address
     type_hint: hidden
-    default: ''
 
 -   name: untrust_subnet_cidr
     description: untrust_subnet_cidr
     type_hint: hidden
-    default: ''
 
 -   name: fw_untrust_ip
     description: fw_untrust_ip
     type_hint: hidden
-    default: ''
 
 -   name: trust_subnet_cidr
     description: trust_subnet_cidr
     type_hint: hidden
-    default: ''
 
 -   name: fw_trust_ip
     description: fw_trust_ip
     type_hint: hidden
-    default: ''
 
 -   name: client_01_trust_ip
     description: client_01_trust_ip
     type_hint: hidden
-    default: ''
 
 -   name: dmz_subnet_cidr
     description: dmz_subnet_cidr
     type_hint: hidden
-    default: ''
 
 -   name: fw_dmz_ip
     description: fw_dmz_ip
     type_hint: hidden
-    default: ''
 
 -   name: client_02_dmz_ip
     description: client_02_dmz_ip
     type_hint: hidden
-    default: ''
 
   # private management ip addresses
 - name: fw_mgmt_ip
   description: private fw mgmt ip address
-  default: ''
   type_hint: hidden
 
 - name: jumphost_mgmt_ip
   description: private jumphost mgmt ip address
-  default: ''
   type_hint: hidden
 
 snippets:
