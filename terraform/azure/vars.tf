@@ -15,7 +15,7 @@ variable "admin_password" {
 
 variable "resource_group_name" {
   type = string
-  default = "cdp_topology_1_ngfw_2_hosts"
+  default = "shoaf_hello_world_0008"
 }
 
 variable "ngfw_version" {
