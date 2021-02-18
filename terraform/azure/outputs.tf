@@ -35,14 +35,14 @@ output "jumphost_mgmt_ip" {
 }
 
 output "untrust_subnet_cidr" {
-  value = azurerm_subnet.untrust.address_prefixes
+  value = azurerm_subnet.untrust.address_prefixes[0]
 }
 
 output "trust_subnet_cidr" {
-  value = azurerm_subnet.trust.address_prefixes
+  value = azurerm_subnet.trust.address_prefixes[0]
 }
 
 output "dmz_subnet_cidr" {
-  value = azurerm_subnet.dmz.address_prefixes
+  value = azurerm_subnet.dmz.address_prefixes[0]
 }
 
