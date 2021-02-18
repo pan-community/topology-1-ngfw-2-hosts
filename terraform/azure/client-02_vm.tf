@@ -22,6 +22,7 @@ resource "azurerm_virtual_machine" "client-02" {
     computer_name = "client-02"
     admin_username = var.admin_username
     admin_password = var.admin_password
+    custom_data = data.template_cloudinit_config.cloud-init-data.rendered
   }
 
   network_interface_ids = [
